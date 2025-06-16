@@ -1,0 +1,74 @@
+# MnemoX Lite - Complete Dependencies List
+# Updated for unified configuration system
+
+# ================================
+# CORE STORAGE & EMBEDDINGS
+# ================================
+qdrant-client>=1.7.0,<2.0.0
+pydantic>=2.0.0,<3.0.0
+httpx>=0.24.0,<1.0.0
+
+# Database utilities
+sqlite-utils>=3.34.0
+
+# Environment and configuration
+python-dotenv>=1.0.0
+
+# ================================
+# MCP PROTOCOL
+# ================================
+# MCP server implementation
+mcp>=1.0.0
+
+# ================================
+# GOOGLE GEMINI API
+# ================================
+# For embeddings and intelligence processing
+google-genai>=1.0.0
+
+# ================================
+# SYSTEM TRAY INTERFACE
+# ================================
+# System tray functionality
+pystray>=0.19.0
+Pillow>=10.0.0
+
+# System monitoring
+psutil>=5.9.0
+
+# Tkinter is included with Python, no need to install
+
+# ================================
+# DEVELOPMENT & TESTING
+# ================================
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
+
+# ================================
+# GUI INTERFACE
+# ================================
+# CustomTkinter for modern desktop GUI
+customtkinter>=5.2.0
+
+# PyWebview for modern desktop GUI (backup option)
+pywebview>=4.0.0
+
+# ================================
+# OPTIONAL WEB INTERFACE
+# ================================
+# If you want to use the web interface (not required for basic operation)
+fastapi>=0.104.0
+uvicorn>=0.24.0
+
+# ================================
+# PYTHON STANDARD LIBRARY USAGE
+# ================================
+# These are built into Python, listed for reference:
+# - json (built-in)
+# - logging (built-in) 
+# - sqlite3 (built-in)
+# - threading (built-in)
+# - pathlib (built-in)
+# - shutil (built-in)
+# - asyncio (built-in)
+# - tkinter (built-in on most systems)
