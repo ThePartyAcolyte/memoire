@@ -25,12 +25,16 @@ logger = logging.getLogger(__name__)
 class MnemoXApp:
     """Unified application managing all MnemoX components."""
     
-    def __init__(self):
+    def __init__(self, enable_gui=True):
         # Initialize logging
         from src.logging_config import get_app_logger
         self.logger = get_app_logger()
         
-        self.logger.info("Initializing MnemoXApp...")
+        self.logger.info(f"Initializing MnemoXApp (GUI: {'enabled' if enable_gui else 'disabled'})...")
+        
+        # GUI/Tray control
+        self.enable_gui = enable_gui
+        
         # Core services (reuse existing)
         self.storage = None
         self.embedding = None
@@ -109,6 +113,11 @@ class MnemoXApp:
     
     def initialize_tray(self):
         """Initialize simplified tray system."""
+        if not self.enable_gui:
+            self.logger.info("GUI disabled - skipping tray initialization")
+            print("ℹ️ GUI disabled - running in headless mode", file=sys.stderr)
+            return True  # Return True so app continues
+            
         if not TRAY_AVAILABLE:
             self.logger.warning("Tray dependencies not available")
             print("⚠️ Tray dependencies not available", file=sys.stderr)
@@ -129,6 +138,10 @@ class MnemoXApp:
 
     def create_and_start_tray(self):
         """Create and start simplified tray with GUI instance."""
+        if not self.enable_gui:
+            self.logger.info("GUI disabled - skipping tray creation")
+            return
+            
         if not TRAY_AVAILABLE:
             print("❌ TRAY_AVAILABLE is False, skipping tray", file=sys.stderr)
             return
@@ -275,11 +288,13 @@ class MnemoXApp:
             self.logger.warning("Tray initialization failed, continuing without tray")
             print("⚠️ Continuing without system tray", file=sys.stderr)
         
-        # Start tray only (GUI opens on demand)
-        self.create_and_start_tray()
-        
-        # Give threads a moment to start
-        await asyncio.sleep(1)
+        # Start tray only if GUI is enabled (GUI opens on demand)
+        if self.enable_gui:
+            self.create_and_start_tray()
+            # Give threads a moment to start
+            await asyncio.sleep(1)
+        else:
+            print("ℹ️ Running in headless mode - no GUI/tray", file=sys.stderr)
         
         # Run MCP server (this blocks until shutdown)
         print("✅ All components started, running MCP server...", file=sys.stderr)

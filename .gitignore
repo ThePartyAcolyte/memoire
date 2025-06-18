@@ -12,7 +12,7 @@ data/
 # Firebase cache
 .firebase/
 .legacy/
-
+venv/
 .config.json.bak
 # Firebase config
 
