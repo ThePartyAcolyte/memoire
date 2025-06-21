@@ -20,6 +20,9 @@ python-dotenv>=1.0.0
 # MCP server implementation
 mcp>=1.0.0
 
+# WebSocket support for remote deployment
+websockets>=12.0
+
 # ================================
 # GOOGLE GEMINI API
 # ================================

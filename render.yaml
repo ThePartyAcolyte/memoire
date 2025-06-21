@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: mnemox-lite
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python run_remote.py
+    envVars:
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: PORT
+        value: "8080"
+      - key: ENABLE_GUI
+        value: "false"
+    disk:
+      name: mnemox-data
+      mountPath: /opt/render/project/src/data
+      sizeGB: 1
